@@ -1,89 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Syne:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-blur: blur(12px);
-  --primary-text: #ffffff;
+  --bg: #00000f;
+  --purple: #7c3aed;
+  --blue: #38bdf8;
+  --sun: #FDB813;
+  --white: #f1f5f9;
+  --glass: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
 }
 
 body {
-  background: radial-gradient(circle at top right, #1a1a2e, #16213e, #0f3460);
-  color: var(--primary-text);
-  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
   overflow-x: hidden;
+  cursor: crosshair;
 }
 
+h1, h2, h3, .font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Glassmorphism utility */
 .glass {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
 }
 
-.glass-nav {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+/* Neon Glow utility */
+.neon-glow {
+  text-shadow: 0 0 10px currentColor,
+               0 0 30px currentColor;
 }
 
-/* Animated Gradient Border Card */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--purple);
+  border-radius: 10px;
+}
+
+/* Re-integrating the Animated Border Card for consistency */
 .animated-border-card {
   position: relative;
   background: rgba(255, 255, 255, 0.05); 
-  backdrop-filter: blur(40px); /* Match 3xl blur */
+  backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-.animated-border-card::before {
-  content: '';
-  position: absolute;
-  inset: -2px; 
-  border-radius: inherit; 
-  padding: 2px; 
-  background: conic-gradient(
-    from 0deg,
-    #ff0000,
-    #ff8000,
-    #ffff00,
-    #00ff00,
-    #00ffff,
-    #0000ff,
-    #8000ff,
-    #ff00ff,
-    #ff0000
-  );
-  animation: rotate 4s linear infinite;
-  
-  /* Masking to show only the border */
-  -webkit-mask: 
-     linear-gradient(#fff 0 0) content-box, 
-     linear-gradient(#fff 0 0);
-  mask: 
-     linear-gradient(#fff 0 0) content-box, 
-     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  
-  z-index: -1; /* Put behind content but pull parent background forward? No, z-index 1 is better if we want it on top of background */
-  pointer-events: none; 
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* (Keeping the rest of the previously implemented animated-border-card CSS if needed elsewhere) */

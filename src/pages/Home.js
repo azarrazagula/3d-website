@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, MeshDistortMaterial, Sphere, MeshWobbleMaterial, Stars, Float } from '@react-three/drei';
 
@@ -7,6 +8,37 @@ const Home = () => {
     <div className="relative h-screen w-full overflow-hidden bg-[#050505]">
       {/* Glass Content */}
       <div className="absolute top-1/2 left-4 md:left-12 lg:left-20 xl:left-32 -translate-y-1/2 z-20 p-8 md:p-12 lg:p-16 rounded-[40px] md:rounded-[50px] backdrop-blur-3xl bg-white/5 animated-border-card max-w-sm md:max-w-lg lg:max-w-xl xl:max-w-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-all">
+        {/* Framer Motion Perimeter Border (Corner-Aware) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[inherit]">
+          <svg className="w-full h-full overflow-visible">
+            <defs>
+              <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#a855f7" />
+                <stop offset="50%" stopColor="#ec4899" />
+                <stop offset="100%" stopColor="#06b6d4" />
+              </linearGradient>
+            </defs>
+            <motion.rect
+              x="0"
+              y="0"
+              width="100%"
+              height="100%"
+              rx="50"
+              ry="50"
+              fill="transparent"
+              stroke="url(#borderGradient)"
+              strokeWidth="4"
+              strokeDasharray="150 1000"
+              initial={{ strokeDashoffset: 0 }}
+              animate={{ strokeDashoffset: -1150 }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+          </svg>
+        </div>
         <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 md:mb-8 bg-gradient-to-br from-white via-purple-200 to-purple-500 bg-clip-text text-transparent leading-[1.1] tracking-tighter">
           Creative Architecture
         </h1>
